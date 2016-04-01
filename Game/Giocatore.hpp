@@ -17,7 +17,7 @@ class Giocatore
 		Giocatore();
 		/* Default destructor */
 		~Giocatore();
-		Giocatore* add();
+		Giocatore* add(coordinate *d);
 		void print(Giocatore*p);
 		Giocatore* getTesta();
 };

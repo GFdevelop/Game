@@ -14,6 +14,7 @@ public:
 	coordinate();
 	~coordinate();
 	coordinate* getTesta();
-	coordinate* add(coordinate * vecchie, int direzione);
-	coordinate* search(coordinate * vecchie, int direzione);
+	coordinate* add(coordinate * vecchie, int direzione, Stanza s);
+	coordinate* search(coordinate * vecchie, int direzione, Stanza s);
+	void print();
 };

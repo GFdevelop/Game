@@ -26,13 +26,14 @@ void Giocatore::print(Giocatore*p)
 }
 
 
-Giocatore* Giocatore::add(){
+Giocatore* Giocatore::add(coordinate *d){
 	
 	if (head == NULL)
 	{
 		head = new Giocatore;
 		cout << "\nInserisci il nome del giocatore ";
 		cin >> head->nomgioc;
+		head->stanza = d;
 		head->next = NULL;
 	}
 	else{

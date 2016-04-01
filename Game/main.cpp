@@ -7,7 +7,9 @@ using namespace std;
 int main()
 {
 	Giocatore g;
+	Stanza s;
 	coordinate c;
+	coordinate * d;
 	int numgioc;
 	int i;
 
@@ -15,9 +17,13 @@ int main()
 		cout << "\nInserisci il numero di giocatori (Min 2-Giocatori) \n";
 		cin >> numgioc;
 	}while(numgioc < 2);
+	
+	d = c.add(NULL, 0, s);
+	//cout << d << endl;
 	for(i=1; i<=numgioc; i++)
 	{
 		g.add();
+		//c.print();
 	}
 	cout << "\nGioco Terminato \n";
 	g.print(g.getTesta());

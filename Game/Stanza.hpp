@@ -12,4 +12,6 @@ public:
     ~Stanza();
     Stanza* Aggiungi_Stanza(Stanza* Stanza_Vecchia, Stanza* Stanza_Nuova, int direzione);
     Stanza* getTesta();
+    void Stampa(Stanza* p);
+    Stanza* creaTesta();
 };

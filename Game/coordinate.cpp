@@ -1,6 +1,7 @@
 #include "coordinate.hpp"
 #include "Stanza.hpp"
 #include <iostream>
+using namespace std;
 
 
 coordinate :: coordinate(){
@@ -24,10 +25,10 @@ coordinate* coordinate::getTesta()
 	return(testa);
 }
 
-coordinate* coordinate :: add(coordinate * vecchie, int direzione){
-	Stanza s;
+coordinate* coordinate :: add(coordinate * vecchie, int direzione, Stanza s){
 	if (testa == NULL){
-		room = s.getTesta();
+		testa = new coordinate;
+		testa->room = s.getTesta();
 	}
 	else {
 		coordinate * p = new coordinate;
@@ -56,7 +57,7 @@ coordinate* coordinate :: add(coordinate * vecchie, int direzione){
 	return (testa);
 }
 
-coordinate* coordinate :: search(coordinate * vecchie, int direzione){
+coordinate* coordinate :: search(coordinate * vecchie, int direzione, Stanza s){
 	bool found = 0;
 	coordinate * p = testa;
 	while ((p != NULL) && (found == 0)){
@@ -68,7 +69,16 @@ coordinate* coordinate :: search(coordinate * vecchie, int direzione){
 		}
 	}
 	if (found == 0){
-		p = add(vecchie, direzione);
+		p = add(vecchie, direzione, s);
 	}
 	return (p);
+}
+
+void coordinate :: print(){
+	coordinate * s = testa;
+	while (s != NULL){
+		cout << s->a << endl;
+		cout << s->b << endl;
+		s = s->pros;
+	}
 }

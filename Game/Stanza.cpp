@@ -3,11 +3,10 @@
 using namespace std;
 
 Stanza::Stanza() {
-    head = new Stanza;
-    head->nextUP=NULL;
-    head->nextRIGHT=NULL;
-    head->nextDOWN=NULL;
-    head->nextLEFT=NULL;
+    nextUP=NULL;
+    nextRIGHT=NULL;
+    nextDOWN=NULL;
+    nextLEFT=NULL;
 }
 
 Stanza::~Stanza() {
@@ -18,13 +17,36 @@ Stanza::~Stanza() {
 	}*/
 }
 
-Stanza* Stanza::getTesta()
-{
+Stanza* Stanza::creaTesta(){
+    Stanza* testa;
+    testa=new Stanza;
+    testa->head=testa;
+    return testa;
+}
+
+Stanza* Stanza::getTesta(){
     return(head);
+}
+
+
+void Stanza::Stampa(Stanza* p){
+    if (p->nextUP!=NULL) {
+        cout<<"Collegmento a NORD \n";
+    }
+    if (p->nextLEFT!=NULL) {
+        cout<<"Collegmento a EST \n";
+    }
+    if (p->nextDOWN!=NULL) {
+        cout<<"Collegmento a SUD \n";
+    }
+    if (p->nextRIGHT!=NULL) {
+        cout<<"Collegmento a OVEST \n";
+    }
 }
 
 Stanza* Stanza::Aggiungi_Stanza(Stanza* Stanza_Vecchia, Stanza* Stanza_Nuova, int direzione){
     //1=su 2=dx 3=giù 4=sx
+    //la prima volta che viene mandato Stanxa_vecchia deve essere inizializata con creaTesta;
     if (Stanza_Nuova==NULL){
         Stanza_Nuova= new Stanza;
         Stanza_Nuova->nextUP=NULL;
@@ -39,7 +61,8 @@ Stanza* Stanza::Aggiungi_Stanza(Stanza* Stanza_Vecchia, Stanza* Stanza_Nuova, in
         } else if (Stanza_Vecchia->nextUP==Stanza_Nuova) {
             cout<<"La porta NORD è già stata aperta";
         } else {
-            cout<<"ERRORE, stai sovrascrivendo una stanza a NORD";
+            cout<<"ERRORE, stai sovrascrivendo una stanza a NORD"<<endl;
+            return (Stanza_Vecchia);
         }
     } else if (direzione==2){
         if (Stanza_Vecchia->nextRIGHT==NULL) {
@@ -48,7 +71,8 @@ Stanza* Stanza::Aggiungi_Stanza(Stanza* Stanza_Vecchia, Stanza* Stanza_Nuova, in
         } else if (Stanza_Vecchia->nextRIGHT==Stanza_Nuova) {
             cout<<"La porta EST è già stata aperta";
         } else {
-            cout<<"ERRORE, stai sovrascrivendo una stanza a EST";
+            cout<<"ERRORE, stai sovrascrivendo una stanza a EST"<<endl;
+            return (Stanza_Vecchia);
         }
     } else if (direzione==3){
         if (Stanza_Vecchia->nextDOWN==NULL) {
@@ -57,7 +81,8 @@ Stanza* Stanza::Aggiungi_Stanza(Stanza* Stanza_Vecchia, Stanza* Stanza_Nuova, in
         } else if (Stanza_Vecchia->nextRIGHT==Stanza_Nuova) {
             cout<<"La porta SUD è già stata aperta";
         } else {
-            cout<<"ERRORE, stai sovrascrivendo una stanza a SUD";
+            cout<<"ERRORE, stai sovrascrivendo una stanza a SUD"<<endl;
+            return (Stanza_Vecchia);
         }
     } else if (direzione==4){
         if (Stanza_Vecchia->nextLEFT==NULL) {
@@ -66,10 +91,13 @@ Stanza* Stanza::Aggiungi_Stanza(Stanza* Stanza_Vecchia, Stanza* Stanza_Nuova, in
         } else if (Stanza_Vecchia->nextRIGHT==Stanza_Nuova) {
             cout<<"La porta OVEST è già stata aperta";
         } else {
-            cout<<"ERRORE, stai sovrascrivendo una stanza a OVEST";
+            cout<<"ERRORE, stai sovrascrivendo una stanza a OVEST"<<endl;
+            return (Stanza_Vecchia);
         }
     } else {
-        cout<<"ERRORE, direzione sbagliata";
+        cout<<"ERRORE, inserita direzione sbagliata"<<endl;
+        return (Stanza_Vecchia);
     }
+    Stanza_Nuova->head=(Stanza_Vecchia->getTesta());
     return (Stanza_Nuova);
 }
