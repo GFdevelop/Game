@@ -54,7 +54,7 @@ coordinate * coordinate :: search(coordinate *& testa, coordinate * precedenti, 
 		precedenti = add(testa, precedenti, direzione);
 		precedenti->a = x;
 		precedenti->b = y;
-		//precedenti->printNode(precedenti);
+		precedenti->printNode(precedenti);
 	}
 	return (precedenti);
 }
