@@ -6,15 +6,18 @@ class coordinate
 protected:
 	int a;
 	int b;
-	Stanza * room;
+    Stanza * room;
 	coordinate * pros;
-private:
-	coordinate * testa;
 public:
 	coordinate();
 	~coordinate();
-	coordinate* getTesta();
-	coordinate* add(coordinate * vecchie, int direzione, Stanza s);
-	coordinate* search(coordinate * vecchie, int direzione, Stanza s);
-	void print();
+	coordinate * add(coordinate *& testa, coordinate * precedenti, int direzione);
+	coordinate * search(coordinate *& testa, coordinate * precedenti, int direzione);
+	void move(int &a, int &b, int direzione);
+	void printList(coordinate * testa);
+	void printNode(coordinate * precedente);
+	void rem(coordinate *& c);
+	int getCoordinatex();
+	int getCoordinatey();
+	Stanza* getRoom();
 };
