@@ -6,12 +6,12 @@
 class Giocatore
 {
 	private:
-    coordinate* stanza;
-    Giocatore* next;
-    Giocatore* head;
-    char nomgioc[20];
-    int cibo;
-    int turno;
+		coordinate* stanza;
+		Giocatore* next;
+		Giocatore* head;
+		char nomgioc[20];
+		int cibo;
+		int turno;
 	public:
 		/* Default constructor */
 		Giocatore();
@@ -20,5 +20,9 @@ class Giocatore
 		Giocatore* add(coordinate *d);
 		void print(Giocatore*p);
 		Giocatore* getTesta();
+		Giocatore* getNext();
+		coordinate* getStanza();
+		void setStanza(Giocatore *p,coordinate *d);
+		void  getNomGioc(char *n);
 };
 
