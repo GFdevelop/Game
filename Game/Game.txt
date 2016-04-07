@@ -1,0 +1,1 @@
+./Debug/coordinate.cpp.o ./Debug/Giocatore.cpp.o ./Debug/main.cpp.o ./Debug/Stanza.cpp.o   
