@@ -7,9 +7,6 @@ Stanza::Stanza() {
     nextRIGHT = NULL;
     nextDOWN = NULL;
     nextLEFT = NULL;
-    valoreRandom = 0;
-    srand(time(0));
-    valoreRandom = (rand() % 100) + 1;
     impCibo();
 }
 
@@ -32,7 +29,6 @@ void Stanza::Stampa() {
     if ((nextUP != NULL) && (nextLEFT != NULL) && (nextDOWN != NULL) && (nextRIGHT != NULL)) {
         cout << "Nessun collegmento \n";
     }
-    cout << "Valore random: " << valoreRandom << "\n";
     cout << "Numero cibo: " << cibo << "\n\n";
 }
 
@@ -124,27 +120,25 @@ Stanza* Stanza::Aggiungi_Stanza(Stanza * Stanza_Vecchia, Stanza * Stanza_Nuova, 
     return (Stanza_Nuova);
 }
 
-int Stanza::getRandom() {
-    return (valoreRandom);
-}
-
-void Stanza::azzeraRandom_eCibo() {
+void Stanza::azzeraCibo() {
     cibo = 0;
-    valoreRandom = 0;
 }
 
 void Stanza::impCibo() {
-    //da 1 a 5 = nulla
-    //da 6 a 8 = 5 cibo
-    //da 9 a 10 = 10 cibo
-    //11       = 20 cibo
-    if ((valoreRandom >= 95) && (valoreRandom <= 100)) {
+    // 2% = 10 cibo
+    // 4% = 5 cibo
+    // 6% = 2 cibo
+    // 88% = 0 cibo
+    srand(time(0));
+    int valoreRandom=0;
+    valoreRandom=(rand() % 50) + 1;
+    if (valoreRandom==50) {
         cibo = 10;
     }
-    else if ((valoreRandom >= 85) && (valoreRandom <= 94)) {
+    else if ((valoreRandom >= 48) && (valoreRandom <= 49)) {
         cibo = 5;
     }
-    else if ((valoreRandom >= 65) && (valoreRandom <= 84)) {
+    else if ((valoreRandom >= 45) && (valoreRandom <= 47)) {
         cibo = 2;
     }
     else {

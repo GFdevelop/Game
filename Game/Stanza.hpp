@@ -10,7 +10,6 @@ private:
 	Stanza* nextDOWN;
 	Stanza* nextRIGHT;
 	Stanza* nextLEFT;
-	int valoreRandom;
 	int cibo;
 public:
 	Stanza();
@@ -18,8 +17,7 @@ public:
 	Stanza* Aggiungi_Stanza(Stanza* Stanza_Vecchia, Stanza* Stanza_Nuova, int direzione);
 	void Stampa();
 	Stanza* creaTesta();
-	int getRandom();
-	void azzeraRandom_eCibo();
+	void azzeraCibo();
 	void imp_valoreRandom();
 	void impCibo();
 	int getCibo();

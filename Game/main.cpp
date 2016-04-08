@@ -11,6 +11,7 @@ int main(){
 	coordinate *d = NULL;
 	coordinate *c = new coordinate;
 	Giocatore *tmp;
+	Giocatore *tmp2;
 	
 	int valcibo;
 	int turno = 1;
@@ -18,6 +19,7 @@ int main(){
 	int ciboStanza;
 	int giro=1;
 	int numgioc=0, i;
+	int tmpGioc;
 
 	head = NULL;
 	//input numero giocatori
@@ -25,6 +27,7 @@ int main(){
 		cout << "\nInserisci il numero di giocatori (Min 2-Giocatori) \n";
 		cin >> numgioc;
 	} while (numgioc < 2);
+	tmpGioc = numgioc;
 	//inserisco i giocatori in una lista
 	for (i = 1; i <= numgioc; i++){
 		head = head->AddGioc(head, d);
@@ -40,12 +43,13 @@ int main(){
     tmp->setStanza(d);//questo setta il l'ultimo elemento
 	tmp = head;
 	//inizia il gioco
-	while ((head->getNext())!=NULL) {
+	while ((head!=NULL) && ((head->getNext())!=NULL)) {
 		cout << "\nTurno " << turno;
-		//tmp = tmp->getTesta();
-		while (giro != (numgioc + 1)){// non metto ((head->getNext())!=NULL) perch c' se muoino tutti nello stesso turno vince l'ultimo che gioca
+		//tmp = tmp->getNext();
+		while (giro != (numgioc + 1)){// non metto ((head->getNext())!=NULL) perchÃ¨ c'Ã¨ se muoiono tutti nello stesso turno vince l'ultimo che gioca
+			tmp2 = tmp->getNext();
 			if (((head->getNext())!=NULL) && (turno == 1)) {
-				tmp->getStanza()->getRoom()->azzeraRandom_eCibo();
+				tmp->getStanza()->getRoom()->azzeraCibo();
 			}
 			cout << "\nTocca a giocatore " << tmp->getNomGioc() << "\nCibo a disposizione: " << tmp->getCibo() << "\nCoordinate giocatore: x:" << tmp->getStanza()->getCoordinatex() << " y:" << tmp->getStanza()->getCoordinatey();
 			do {
@@ -62,33 +66,33 @@ int main(){
                 valcibo = (tmp->getCibo()) + ciboStanza;
                 tmp->setCibo(valcibo);
 			}
-			tmp->getStanza()->getRoom()->azzeraRandom_eCibo();
+			tmp->getStanza()->getRoom()->azzeraCibo();
             //se il giocatore ha 0 di cibo allora viene eliminato
             if ((tmp->getCibo())==0) {
                 tmp->eliminaGiocatore(head);
+				tmpGioc = tmpGioc - 1;
             }
-			tmp = tmp->getTesta();
+			tmp = tmp2;
 			giro++;	
 		}
 		//ricomincia il giro
 		giro = 1;
 		turno = turno + 1;
-        if (head->getNext()!=NULL) {
-            tmp = head;
-        }
+        tmp = head;
+		numgioc = tmpGioc;
+
 	}
     
-    cout << "\nHa vinto giocatore " << tmp->getNomGioc() << "\nCon con ancora " << tmp->getCibo() << " di cibo \na coordinate x:" << tmp->getStanza()->getCoordinatex() << " y:" << tmp->getStanza()->getCoordinatey();
-	//stampa giocatori
-	tmp = head;
-	while (tmp != NULL)
-	{
-		cout << tmp->getNomGioc() << endl;
-		tmp = tmp->getTesta();
-	}
+    if (head==NULL) {
+        cout<<"\nSono morti tutti i giocatori";
+    } else {
+        cout << "\nHa vinto giocatore " << tmp->getNomGioc() << "\nCon con ancora " << tmp->getCibo() << " di cibo \na coordinate x:" << tmp->getStanza()->getCoordinatex() << " y:" << tmp->getStanza()->getCoordinatey();
+        
+    }
+    
 	//distruggo
+    cout<<"\nPulisco memoria\n";
 	rimuovi(head);
-	system("pause");
 	return 0;
 
 
@@ -111,7 +115,7 @@ int main(){
 void rimuovi(Giocatore *headGiocatore)
 {
 	if (headGiocatore != NULL)
-		rimuovi(headGiocatore->getTesta());
+		rimuovi(headGiocatore->getNext());
 	delete headGiocatore;
 }
 
@@ -137,4 +141,4 @@ ptr_gioc tail_insert(ptr_gioc head, int i){
 				p->next = NULL ;
 	}
 	return(head) ;
-}ù*/
+}Ã¹*/

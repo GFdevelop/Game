@@ -18,7 +18,6 @@ public:
 	~Giocatore();
 
 	Giocatore * AddGioc(Giocatore* link, coordinate *d);
-	Giocatore* getTesta();
 	coordinate* getStanza();
 	int getCibo();
 	void setStanza(coordinate *d);

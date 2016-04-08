@@ -45,12 +45,6 @@ Giocatore* Giocatore::AddGioc(Giocatore* link, coordinate *d) {
 	return(link);
 }
 
-
-Giocatore* Giocatore::getTesta()
-{
-	return(next);
-}
-
 int Giocatore::getCibo()
 {
 	return(cibo);
@@ -85,21 +79,23 @@ void Giocatore::eliminaGiocatore(Giocatore*& head){
         q=head;
         head=head->next;
         delete q;
+		g=head;
     }
-    while ((g != NULL) && ((g->next)!=NULL) && (found == 0)) {
-        if ((g->next->cibo)==0) {
-            found = 1;
-        }
-        else {
-            g = g->next;
-        }
-    }
-    if (found == 1) {
-        q=g->next->next;
-        delete g->next;
-        g->next=q;
-        delete q;
-    }
+	else{
+		while ((g != NULL) && ((g->next)!=NULL) && (found == 0)) {
+			if ((g->next->cibo)==0) {
+				found = 1;
+			}
+			else {
+				g = g->next;
+			}
+		}
+		if (found == 1) {
+			q=g->next->next;
+			delete g->next;
+			g->next=q;
+		}
+	}
 }
 /*
 Giocatore* Giocatore::nextGioc(Giocatore* g) {
@@ -131,7 +127,7 @@ void Giocatore::gioco(coordinate* headCoordinate, Stanza* headStanza, Giocatore*
 			g->coordinata = g->coordinata->SearchAndAdd(g->coordinata, headCoordinate, direzione);
 			ciboStanza = g->coordinata->getStanza()->getCibo();
 			if (ciboStanza != 0) {
-				cout << "Hai trovato " << ciboStanza << " unità di cibo!\n";
+				cout << "Hai trovato " << ciboStanza << " unitÃ  di cibo!\n";
 			}
 			g->cibo = (g->cibo) + ciboStanza;
 			
