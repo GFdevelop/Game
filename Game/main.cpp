@@ -73,7 +73,9 @@ int main(){
 		//ricomincia il giro
 		giro = 1;
 		turno = turno + 1;
-		tmp = head;
+        if (head->getNext()!=NULL) {
+            tmp = head;
+        }
 	}
     
     cout << "\nHa vinto giocatore " << tmp->getNomGioc() << "\nCon con ancora " << tmp->getCibo() << " di cibo \na coordinate x:" << tmp->getStanza()->getCoordinatex() << " y:" << tmp->getStanza()->getCoordinatey();

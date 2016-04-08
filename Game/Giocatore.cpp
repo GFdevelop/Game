@@ -17,7 +17,7 @@ Giocatore::Giocatore(Giocatore *next) {
 */
 Giocatore::~Giocatore()
 {
-	cout << " \n\n DIo cane";
+	cout << "Eliminato giocatore "<<nomgioc<<endl;
 }
 
 
