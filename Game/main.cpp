@@ -34,7 +34,6 @@ int main(){
 	}
 	//inizializzo la stanza
 	d = c->add(c, NULL, 0);
-	//head->setStanza(d); setStanza imposta la coordinata solo al primo giocatore
     tmp = head;
     while (tmp->getNext()!=NULL) {
         tmp->setStanza(d);
@@ -89,27 +88,10 @@ int main(){
         cout << "\nHa vinto giocatore " << tmp->getNomGioc() << "\nCon con ancora " << tmp->getCibo() << " di cibo \na coordinate x:" << tmp->getStanza()->getCoordinatex() << " y:" << tmp->getStanza()->getCoordinatey();
         
     }
-    
 	//distruggo
     cout<<"\nPulisco memoria\n";
 	rimuovi(head);
 	return 0;
-
-
-	/*	Stanza* headStanza = new Stanza;
-		coordinate* headCoordinate=NULL;
-		headCoordinate = headCoordinate->createHead(headStanza);
-		Giocatore* headGiocatore=NULL;
-		//headGiocatore = headGiocatore->createHead(headCoordinate);
-
-		for (i = 1; i <= numgioc; i++) //crea la lista dei giocatori e li fa puntare a 0,0
-		{
-			headGiocatore = headGiocatore->AddGioc(headGiocatore, headCoordinate);
-		}
-
-		headGiocatore->gioco(headCoordinate, headStanza, headGiocatore, numgioc);
-
-	*/
 }
 
 void rimuovi(Giocatore *headGiocatore)

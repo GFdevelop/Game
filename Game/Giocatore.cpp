@@ -10,11 +10,7 @@ Giocatore::Giocatore()
 	coordinata = NULL;
 	cibo = 5;
 }
-/*
-Giocatore::Giocatore(Giocatore *next) {
-	return(link->next);
-}
-*/
+
 Giocatore::~Giocatore()
 {
 	cout << "Eliminato giocatore "<<nomgioc<<endl;
@@ -97,48 +93,22 @@ void Giocatore::eliminaGiocatore(Giocatore*& head){
 		}
 	}
 }
-/*
-Giocatore* Giocatore::nextGioc(Giocatore* g) {
-	g = g->next;
-	return (g);
-}
-*/
-/*
-void Giocatore::gioco(coordinate* headCoordinate, Stanza* headStanza, Giocatore* headGiocatore, int numgioc) {
-	int direzione = 0;
-	int turno = 1;
-	int giro = 1;
-	int ciboStanza;
-	Giocatore* g;
-	g = headGiocatore;
-	while ((headGiocatore != NULL) && (g->cibo == 0)){
-		cout << "\nTurno " << turno;
-		g = g->next;//salta la testa
-		while ((giro != (numgioc + 1))) {
-			if (turno == 1) {
-				g->coordinata->getStanza()->azzeraRandom_eCibo();
-			}
-			cout << "\nTocca a giocatore " << g->getNomGioc() << "\nCibo a disposizione: " << g->cibo << "\nCoordinate giocatore: x:" << g->coordinata->getCoordinatex() << " y:" << g->coordinata->getCoordinatey();
-			do {
-				cout << "\n Dove si sposta? 8-su 6-destra 2-giu 4-sinistra: ";
-				cin >> direzione;
-			} while ((direzione != 8) && (direzione != 6) && (direzione != 2) && (direzione != 4));
-			g->cibo = (g->cibo) - 1;
-			g->coordinata = g->coordinata->SearchAndAdd(g->coordinata, headCoordinate, direzione);
-			ciboStanza = g->coordinata->getStanza()->getCibo();
-			if (ciboStanza != 0) {
-				cout << "Hai trovato " << ciboStanza << " unità di cibo!\n";
-			}
-			g->cibo = (g->cibo) + ciboStanza;
-			
-			g->coordinata->getStanza()->azzeraRandom_eCibo();
-			g = g->nextGioc(g);
-			giro = giro + 1;
+
+
+int Giocatore::cercaNumGioc(Giocatore* head, int x)
+{
+	int cont=0;
+
+	Giocatore* g = head;
+	while (g != NULL)
+	{
+		if (g->getStanza()->getCoordinatex() == x)
+		{
+			cont++;
 		}
-		giro = 1;
-		turno = turno + 1;
-		g = headGiocatore;
+		g = g->next;
 	}
-}*/
+	cout << "\n\n \tsss" << cont;
 
-
+	return (cont);
+}
