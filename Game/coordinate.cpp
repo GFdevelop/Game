@@ -82,6 +82,18 @@ void coordinate::rem(coordinate *& c) {
     delete c;
 }
 
+bool coordinate::findMap(coordinate *& testa, int i, int j){
+	coordinate * f = testa;
+	int found = 0;
+	while ((f != NULL) && (!found)){
+		if ((i == f->a) && (j == f->b)){
+			found = 1;
+		}
+		f = f->pros;
+	}
+	return (found);
+}
+
 void coordinate::printList(coordinate * testa) {
     cout << "Lista:" << endl;
     coordinate * s = testa;

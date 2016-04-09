@@ -13,6 +13,7 @@ public:
 	~coordinate();
 	coordinate * add(coordinate *& testa, coordinate * precedenti, int direzione);
 	coordinate * search(coordinate *& testa, coordinate * precedenti, int direzione);
+	bool findMap(coordinate *& testa, int i, int j);
 	void move(int &a, int &b, int direzione);
 	void printList(coordinate * testa);
 	void printNode(coordinate * precedente);

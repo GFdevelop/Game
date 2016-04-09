@@ -2,6 +2,7 @@
 #include "Stanza.hpp"
 #include "Giocatore.hpp"
 #include "coordinate.hpp"
+#include "mappa.hpp"
 using namespace std;
 
 void rimuovi(Giocatore *headGiocatore);
@@ -12,6 +13,7 @@ int main(){
 	coordinate *c = new coordinate;
 	Giocatore *tmp;
 	Giocatore *tmp2;
+	mappa * m = new mappa;
 	
 	int valcibo;
 	int turno = 1;
@@ -34,6 +36,8 @@ int main(){
 	}
 	//inizializzo la stanza
 	d = c->add(c, NULL, 0);
+	m->add(d);	//per stampa mappa
+	m->print(c);
 	//head->setStanza(d); setStanza imposta la coordinata solo al primo giocatore
     tmp = head;
     while (tmp->getNext()!=NULL) {
@@ -59,6 +63,7 @@ int main(){
 			valcibo = (tmp->getCibo()) - 1;
 			tmp->setCibo(valcibo);
 			d = c->search(c, tmp->getStanza(), mossa);
+			m->add(d);	//per stampa mappa
 			tmp->setStanza(d);
 			ciboStanza = tmp->getStanza()->getRoom()->getCibo();
 			if (ciboStanza != 0) {
@@ -73,7 +78,9 @@ int main(){
 				tmpGioc = tmpGioc - 1;
             }
 			tmp = tmp2;
-			giro++;	
+			giro++;
+			//stampa mappa
+			m->print(c);
 		}
 		//ricomincia il giro
 		giro = 1;
