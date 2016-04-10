@@ -10,11 +10,7 @@ Giocatore::Giocatore()
 	coordinata = NULL;
 	cibo = 5;
 }
-/*
-Giocatore::Giocatore(Giocatore *next) {
-	return(link->next);
-}
-*/
+
 Giocatore::~Giocatore()
 {
 	cout << "Eliminato giocatore "<<nomgioc<<endl;
@@ -97,48 +93,38 @@ void Giocatore::eliminaGiocatore(Giocatore*& head){
 		}
 	}
 }
-/*
-Giocatore* Giocatore::nextGioc(Giocatore* g) {
-	g = g->next;
-	return (g);
-}
-*/
-/*
-void Giocatore::gioco(coordinate* headCoordinate, Stanza* headStanza, Giocatore* headGiocatore, int numgioc) {
-	int direzione = 0;
-	int turno = 1;
-	int giro = 1;
-	int ciboStanza;
-	Giocatore* g;
-	g = headGiocatore;
-	while ((headGiocatore != NULL) && (g->cibo == 0)){
-		cout << "\nTurno " << turno;
-		g = g->next;//salta la testa
-		while ((giro != (numgioc + 1))) {
-			if (turno == 1) {
-				g->coordinata->getStanza()->azzeraRandom_eCibo();
+
+int Giocatore::cercaNumGioc(Giocatore* head, int x, int &l)
+{
+	int lung;
+	int c=0;
+	int cont;
+	int i, j, a, b;
+
+	Giocatore* g = head;
+	Giocatore* n = head;
+	while (g != NULL)
+	{
+		lung = -1;
+		i = g->coordinata->getCoordinatex();
+		if (i == x)
+		{
+			cont = 0;
+			j = g->coordinata->getCoordinatey();
+			while (n != NULL){
+				a = n->coordinata->getCoordinatex();
+				b = n->coordinata->getCoordinatey();
+				if ((a == i) && (b == j)){
+					lung = lung + (strlen(n->nomgioc) + 1);
+					cont++;
+				}
+				n = n->next;
 			}
-			cout << "\nTocca a giocatore " << g->getNomGioc() << "\nCibo a disposizione: " << g->cibo << "\nCoordinate giocatore: x:" << g->coordinata->getCoordinatex() << " y:" << g->coordinata->getCoordinatey();
-			do {
-				cout << "\n Dove si sposta? 8-su 6-destra 2-giu 4-sinistra: ";
-				cin >> direzione;
-			} while ((direzione != 8) && (direzione != 6) && (direzione != 2) && (direzione != 4));
-			g->cibo = (g->cibo) - 1;
-			g->coordinata = g->coordinata->SearchAndAdd(g->coordinata, headCoordinate, direzione);
-			ciboStanza = g->coordinata->getStanza()->getCibo();
-			if (ciboStanza != 0) {
-				cout << "Hai trovato " << ciboStanza << " unità di cibo!\n";
-			}
-			g->cibo = (g->cibo) + ciboStanza;
-			
-			g->coordinata->getStanza()->azzeraRandom_eCibo();
-			g = g->nextGioc(g);
-			giro = giro + 1;
 		}
-		giro = 1;
-		turno = turno + 1;
-		g = headGiocatore;
+		if (l < lung) l = lung;
+		if (c < cont) c = cont;
+		g = g->next;
+		n = head;
 	}
-}*/
-
-
+	return (c);
+}

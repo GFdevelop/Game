@@ -82,7 +82,7 @@ void coordinate::rem(coordinate *& c) {
     delete c;
 }
 
-bool coordinate::findMap(coordinate *& testa, int i, int j){
+bool coordinate::findMap(coordinate * testa, int i, int j){
 	coordinate * f = testa;
 	int found = 0;
 	while ((f != NULL) && (!found)){
