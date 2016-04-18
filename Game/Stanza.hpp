@@ -1,4 +1,6 @@
-#pragma once
+#ifndef STANZA_HPP
+#define STANZA_HPP
+
 #include <iostream>
 #include<ctime>
 #include<cstdlib>
@@ -22,3 +24,5 @@ public:
 	void impCibo();
 	int getCibo();
 };
+
+#endif

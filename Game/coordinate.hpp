@@ -1,4 +1,5 @@
-#pragma once
+#ifndef COORDINATE_HPP
+#define COORDINATE_HPP
 #include "Stanza.hpp"
 
 class coordinate
@@ -22,3 +23,5 @@ public:
 	int getCoordinatey();
 	Stanza* getRoom();
 };
+
+#endif

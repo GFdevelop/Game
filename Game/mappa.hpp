@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MAPPA_HPP
+#define MAPPA_HPP
+
 #include "coordinate.hpp"
 #include "Giocatore.hpp"
 #include "string.h"
@@ -16,3 +18,5 @@ public:
 	void print(coordinate * testa, Giocatore * head);
 	void forName(Giocatore * head, int inX, int x, int y, int l);
 };
+
+#endif

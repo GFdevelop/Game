@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GIOCATORE_HPP
+#define GIOCATORE_HPP
 #include "Stanza.hpp"
 #include "coordinate.hpp"
 
@@ -29,3 +30,4 @@ public:
     void eliminaGiocatore(Giocatore*& head);
 };
 
+#endif
