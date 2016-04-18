@@ -3,10 +3,25 @@
 #include "Giocatore.hpp"
 #include "coordinate.hpp"
 #include "mappa.hpp"
+#include <cstdlib>
+
+#if defined UNIX
+#define CLEARSCR system ( "clear" )
+#elif defined MSDOS || defined WIN32
+#define CLEARSCR system ( "cls" )
+#endif
+
 using namespace std;
 
 void rimuovi(Giocatore *headGiocatore);
 
+void clear_screen(){
+	cout<<"prova"<<endl;
+	//CLEARSCR;
+	//system("cls||clear");
+	system("clear");
+}
+ 
 int main(){
 	Giocatore *head;
 	coordinate *d = NULL;
@@ -17,7 +32,7 @@ int main(){
 	
 	int valcibo;
 	int turno = 1;
-	int mossa;
+	int mossa = 0;
 	int ciboStanza;
 	int giro=1;
 	int numgioc=0, i;
@@ -26,7 +41,7 @@ int main(){
 	head = NULL;
 	//input numero giocatori
     do{
-		cout << "\nInserisci il numero di giocatori (Min 2-Giocatori) \n";
+		cout << "Inserisci il numero di giocatori (Min 2-Giocatori) \n";
 		cin >> numgioc;
 	} while (numgioc < 2);
 	tmpGioc = numgioc;
@@ -38,18 +53,19 @@ int main(){
 	d = c->add(c, NULL, 0);
 	m->add(d);	//per stampa mappa
     tmp = head;
-    while (tmp->getNext()!=NULL) {
+	//inizializza tutti i giocatori alla stanza iniziale con coordinate 0,0
+	while (tmp!=NULL) {
         tmp->setStanza(d);
         tmp=tmp->getNext();
     }
-    tmp->setStanza(d);//questo setta il l'ultimo elemento
+	clear_screen();
 	tmp = head;
 	//inizia il gioco
 	m->print(c, head);
 	while ((head!=NULL) && ((head->getNext())!=NULL)) {
 		cout << "\nTurno " << turno;
 		//tmp = tmp->getNext();
-		while (giro != (numgioc + 1)){// non metto ((head->getNext())!=NULL) perchè c'è se muoiono tutti nello stesso turno vince l'ultimo che gioca
+		while (giro != (numgioc + 1)){
 			tmp2 = tmp->getNext();
 			if (((head->getNext())!=NULL) && (turno == 1)) {
 				tmp->getStanza()->getRoom()->azzeraCibo();
@@ -78,6 +94,7 @@ int main(){
             }
 			tmp = tmp2;
 			giro++;
+			clear_screen();
 			//stampa mappa
 			m->print(c, head);
 		}
@@ -88,16 +105,19 @@ int main(){
 		numgioc = tmpGioc;
 
 	}
-    
+
+	//fine gioco
     if (head==NULL) {
         cout<<"\nSono morti tutti i giocatori";
     } else {
-        cout << "\nHa vinto giocatore " << tmp->getNomGioc() << "\nCon con ancora " << tmp->getCibo() << " di cibo \na coordinate x:" << tmp->getStanza()->getCoordinatex() << " y:" << tmp->getStanza()->getCoordinatey();
-        
+		cout << "\nHa vinto giocatore " << tmp->getNomGioc() << "\nCon ancora " << tmp->getCibo() << " unità di cibo \na coordinate x:" << tmp->getStanza()->getCoordinatex() << " y:" << tmp->getStanza()->getCoordinatey();
     }
-	//distruggo
+	
+	//elimino tutti i giocatori,coordinate e le stanze
     cout<<"\nPulisco memoria\n";
 	rimuovi(head);
+	c->rem(c);
+	cout<<"Fine pulizia\n";
 	return 0;
 }
 

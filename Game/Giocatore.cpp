@@ -69,13 +69,12 @@ char* Giocatore::getNomGioc() {
 
 void Giocatore::eliminaGiocatore(Giocatore*& head){
     Giocatore* g=head;
-    Giocatore* q;
+
     bool found=0;
     if (g->cibo==0) {
-        q=head;
+
         head=head->next;
-        delete q;
-		g=head;
+        delete g;;
     }
 	else{
 		while ((g != NULL) && ((g->next)!=NULL) && (found == 0)) {
@@ -87,7 +86,7 @@ void Giocatore::eliminaGiocatore(Giocatore*& head){
 			}
 		}
 		if (found == 1) {
-			q=g->next->next;
+			Giocatore* q=g->next->next;
 			delete g->next;
 			g->next=q;
 		}

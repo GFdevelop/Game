@@ -12,6 +12,7 @@ coordinate::coordinate() {
 }
 
 coordinate::~coordinate() {
+	cout<<"Rimossa stanza x:"<<a<<" y:"<<b<<endl;
     delete room;
 }
 

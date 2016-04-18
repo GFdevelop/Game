@@ -17,7 +17,6 @@ public:
 	Stanza();
 	~Stanza();
 	Stanza* Aggiungi_Stanza(Stanza* Stanza_Vecchia, Stanza* Stanza_Nuova, int direzione);
-	void Stampa();
 	Stanza* creaTesta();
 	void azzeraCibo();
 	void imp_valoreRandom();

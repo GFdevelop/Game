@@ -1,6 +1,6 @@
 #include "Stanza.hpp"
 using namespace std;
-//mi vedi?
+
 
 Stanza::Stanza() {
     nextUP = NULL;
@@ -11,25 +11,6 @@ Stanza::Stanza() {
 }
 
 Stanza::~Stanza() {
-}
-
-void Stanza::Stampa() {
-    if (nextUP != NULL) {
-        cout << "Collegmento a NORD \n";
-    }
-    if (nextLEFT != NULL) {
-        cout << "Collegmento a OVEST \n";
-    }
-    if (nextDOWN != NULL) {
-        cout << "Collegmento a SUD \n";
-    }
-    if (nextRIGHT != NULL) {
-        cout << "Collegmento a EST \n";
-    }
-    if ((nextUP != NULL) && (nextLEFT != NULL) && (nextDOWN != NULL) && (nextRIGHT != NULL)) {
-        cout << "Nessun collegmento \n";
-    }
-    cout << "Numero cibo: " << cibo << "\n\n";
 }
 
 Stanza* Stanza::Aggiungi_Stanza(Stanza * Stanza_Vecchia, Stanza * Stanza_Nuova, int direzione) {
@@ -127,8 +108,8 @@ void Stanza::azzeraCibo() {
 void Stanza::impCibo() {
     // 2% = 10 cibo
     // 4% = 5 cibo
-    // 6% = 2 cibo
-    // 88% = 0 cibo
+    // 8% = 2 cibo
+    // 86% = 0 cibo
     srand(time(0));
     int valoreRandom=0;
     valoreRandom=(rand() % 50) + 1;
@@ -138,7 +119,7 @@ void Stanza::impCibo() {
     else if ((valoreRandom >= 48) && (valoreRandom <= 49)) {
         cibo = 5;
     }
-    else if ((valoreRandom >= 45) && (valoreRandom <= 47)) {
+    else if ((valoreRandom >= 44) && (valoreRandom <= 47)) {
         cibo = 2;
     }
     else {
