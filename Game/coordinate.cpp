@@ -25,7 +25,7 @@ coordinate *coordinate::add(coordinate *& testa, coordinate * precedenti, int di
     }
     else {
         coordinate * p = new coordinate;
-        p->room = new Stanza;
+        p->room = NULL;
         p->room = p->room->Aggiungi_Stanza(precedenti->room, p->room, direzione);
         p->pros = testa;
         testa = p;

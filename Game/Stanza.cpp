@@ -7,7 +7,7 @@ Stanza::Stanza() {
     nextRIGHT = NULL;
     nextDOWN = NULL;
     nextLEFT = NULL;
-    impCibo();
+    cibo=0;
 }
 
 Stanza::~Stanza() {
@@ -17,86 +17,23 @@ Stanza* Stanza::Aggiungi_Stanza(Stanza * Stanza_Vecchia, Stanza * Stanza_Nuova, 
     //2=giù 4=sx 6=dx 8=sù
     if (Stanza_Nuova == NULL) {
         Stanza_Nuova = new Stanza;
+        Stanza_Nuova->impCibo();
     }
-    if (direzione == 8) {
-        if ((Stanza_Nuova->nextDOWN != NULL) && (Stanza_Nuova->nextDOWN != Stanza_Vecchia)) {
-            cout << "ERRORE, la stanza nuova ha già un coolegmento a SUD diverso dalla stanza vecchia, ritorno stanza vecchia" << endl;
-            return (Stanza_Vecchia);
-        }
-        else {
-            if (Stanza_Vecchia->nextUP == NULL) {
-                Stanza_Vecchia->nextUP = Stanza_Nuova;
-                Stanza_Nuova->nextDOWN = Stanza_Vecchia;
-            }
-            else if (Stanza_Vecchia->nextUP == Stanza_Nuova) {
-                cout << "La porta NORD è già stata aperta \n";
-            }
-            else if ((Stanza_Vecchia->nextUP != Stanza_Nuova)) {
-                cout << "ERRORE, stai sovrascrivendo la stanza a NORD, ritorno stanza vecchia \n" << endl;
-                return (Stanza_Vecchia);
-            }
-        }
+    if ((direzione == 8)&&(Stanza_Nuova->nextDOWN==NULL)&&(Stanza_Vecchia->nextUP==NULL)) {
+            Stanza_Vecchia->nextUP = Stanza_Nuova;
+            Stanza_Nuova->nextDOWN = Stanza_Vecchia;
     }
-    else if (direzione == 6) {
-        if ((Stanza_Nuova->nextLEFT != NULL) && (Stanza_Nuova->nextLEFT != Stanza_Vecchia)) {
-            cout << "ERRORE, la stanza nuova ha già un coolegmento a OVEST diverso dalla stanza vecchia, ritorno stanza vecchia" << endl;
-            return (Stanza_Vecchia);
-        }
-        else {
-            if (Stanza_Vecchia->nextRIGHT == NULL) {
-                Stanza_Vecchia->nextRIGHT = Stanza_Nuova;
-                Stanza_Nuova->nextLEFT = Stanza_Vecchia;
-            }
-            else if (Stanza_Vecchia->nextRIGHT == Stanza_Nuova) {
-                cout << "La porta EST è già stata aperta";
-            }
-            else {
-                cout << "ERRORE, stai sovrascrivendo la stanza a EST" << endl;
-                return (Stanza_Vecchia);
-            }
-        }
+    else if ((direzione == 6)&&(Stanza_Nuova->nextLEFT==NULL)&&(Stanza_Vecchia->nextRIGHT==NULL)) {
+            Stanza_Vecchia->nextRIGHT = Stanza_Nuova;
+            Stanza_Nuova->nextLEFT = Stanza_Vecchia;
     }
-    else if (direzione == 2) {
-        if ((Stanza_Nuova->nextUP != NULL) && (Stanza_Nuova->nextUP != Stanza_Vecchia)) {
-            cout << "ERRORE, la stanza nuova ha già un coolegmento a NORD diverso dalla stanza vecchia, ritorno stanza vecchia" << endl;
-            return (Stanza_Vecchia);
-        }
-        else {
-            if (Stanza_Vecchia->nextDOWN == NULL) {
-                Stanza_Vecchia->nextDOWN = Stanza_Nuova;
-                Stanza_Nuova->nextUP = Stanza_Vecchia;
-            }
-            else if (Stanza_Vecchia->nextDOWN == Stanza_Nuova) {
-                cout << "La porta SUD è già stata aperta";
-            }
-            else {
-                cout << "ERRORE, stai sovrascrivendo la stanza a SUD" << endl;
-                return (Stanza_Vecchia);
-            }
-        }
+    else if ((direzione == 2)&&(Stanza_Nuova->nextUP==NULL)&&(Stanza_Vecchia->nextDOWN==NULL)){
+            Stanza_Vecchia->nextDOWN = Stanza_Nuova;
+            Stanza_Nuova->nextUP = Stanza_Vecchia;
     }
-    else if (direzione == 4) {
-        if ((Stanza_Nuova->nextRIGHT != NULL) && (Stanza_Nuova->nextRIGHT != Stanza_Vecchia)) {
-            cout << "ERRORE, la stanza nuova ha già un coolegmento a EST diverso dalla stanza vecchia, ritorno stanza vecchia" << endl;
-            return (Stanza_Vecchia);
-        }
-        else {
-            if (Stanza_Vecchia->nextLEFT == NULL) {
-                Stanza_Vecchia->nextLEFT = Stanza_Nuova;
-                Stanza_Nuova->nextRIGHT = Stanza_Vecchia;
-            }
-            else if (Stanza_Vecchia->nextLEFT == Stanza_Nuova) {
-                cout << "La porta OVEST è già stata aperta";
-            }
-            else {
-                cout << "ERRORE, stai sovrascrivendo la stanza a OVEST" << endl;
-                return (Stanza_Vecchia);
-            }
-        }
-    }
-    else {
-        cout << "ERRORE, inserita direzione sbagliata" << endl;
-        return (Stanza_Vecchia);
+    else if ((direzione == 4)&&(Stanza_Nuova->nextRIGHT==NULL)&&(Stanza_Vecchia->nextLEFT==NULL)) {
+            Stanza_Vecchia->nextLEFT = Stanza_Nuova;
+            Stanza_Nuova->nextRIGHT = Stanza_Vecchia;
     }
     return (Stanza_Nuova);
 }

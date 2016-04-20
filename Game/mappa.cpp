@@ -67,7 +67,7 @@ void mappa::forName(Giocatore * head, int inX, int x, int y, int l){
 		a = n->getStanza()->getCoordinatex();
 		b = n->getStanza()->getCoordinatey();
 		if ((a == x) && (b == y)) {
-			strcpy(nome,n->getNomGioc());
+            n->getNomGioc(nome);
 			lung = lung + (strlen(nome) + 1);
 			if (i == 0) cout << nome;
 			else cout << "," << nome;

@@ -9,6 +9,7 @@ Giocatore::Giocatore()
 	next = NULL;
 	coordinata = NULL;
 	cibo = 5;
+    nomgioc[0]='\0';
 }
 
 Giocatore::~Giocatore()
@@ -41,13 +42,11 @@ Giocatore* Giocatore::AddGioc(Giocatore* link, coordinate *d) {
 	return(link);
 }
 
-int Giocatore::getCibo()
-{
+int Giocatore::getCibo() {
 	return(cibo);
 }
 
-void Giocatore::setCibo(int cib)
-{
+void Giocatore::setCibo(int cib) {
 	cibo = cib;
 }
 
@@ -55,7 +54,7 @@ coordinate* Giocatore::getStanza() {
 	return(coordinata);
 }
 
-Giocatore* Giocatore::getNext(){
+Giocatore* Giocatore::getNext() {
     return (next);
 }
 
@@ -63,20 +62,20 @@ void Giocatore::setStanza(coordinate *d) {
     coordinata=d;
 }
 
-char* Giocatore::getNomGioc() {
-	return this->nomgioc;
+void Giocatore::getNomGioc(char a[]) {
+    strcpy(a,nomgioc);
 }
 
-void Giocatore::eliminaGiocatore(Giocatore*& head){
+void Giocatore::eliminaGiocatore(Giocatore*& head) {
     Giocatore* g=head;
-
-    bool found=0;
+    
     if (g->cibo==0) {
 
         head=head->next;
         delete g;;
     }
 	else{
+        bool found=0;
 		while ((g != NULL) && ((g->next)!=NULL) && (found == 0)) {
 			if ((g->next->cibo)==0) {
 				found = 1;
@@ -93,8 +92,7 @@ void Giocatore::eliminaGiocatore(Giocatore*& head){
 	}
 }
 
-int Giocatore::cercaNumGioc(Giocatore* head, int x, int &l)
-{
+int Giocatore::cercaNumGioc(Giocatore* head, int x, int &l) {
 	int lung;
 	int c=0;
 	int cont;

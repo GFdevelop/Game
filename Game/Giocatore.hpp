@@ -21,7 +21,7 @@ public:
 	int getCibo();
 	void setStanza(coordinate *d);
 	void setCibo(int cib);
-	char*  getNomGioc();
+	void  getNomGioc(char a[]);
 	int cercaNumGioc(Giocatore* head, int x, int &l);
     Giocatore* getNext();
     void eliminaGiocatore(Giocatore*& head);
