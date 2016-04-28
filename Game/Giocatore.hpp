@@ -4,8 +4,7 @@
 #include "coordinate.hpp"
 
 
-class Giocatore
-{
+class Giocatore{
 private:
 	coordinate* coordinata;
 	Giocatore* next;
@@ -22,7 +21,7 @@ public:
 	void setStanza(coordinate *d);
 	void setCibo(int cib);
 	void  getNomGioc(char a[]);
-	int cercaNumGioc(Giocatore* head, int x, int &l);
+	int cercaNumGioc(Giocatore* head, int x);
     Giocatore* getNext();
     void eliminaGiocatore(Giocatore*& head);
 };

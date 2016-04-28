@@ -14,7 +14,7 @@ Giocatore::Giocatore()
 
 Giocatore::~Giocatore()
 {
-	cout << "Eliminato giocatore "<<nomgioc<<endl;
+	//cout << "Eliminato giocatore "<<nomgioc<<endl;
 }
 
 
@@ -70,9 +70,9 @@ void Giocatore::eliminaGiocatore(Giocatore*& head) {
     Giocatore* g=head;
     
     if (g->cibo==0) {
-
         head=head->next;
-        delete g;;
+        cout << "Eliminato giocatore "<<g->nomgioc<<endl;
+        delete g;
     }
 	else{
         bool found=0;
@@ -86,42 +86,42 @@ void Giocatore::eliminaGiocatore(Giocatore*& head) {
 		}
 		if (found == 1) {
 			Giocatore* q=g->next->next;
+            cout << "Eliminato giocatore "<<g->next->nomgioc<<endl;
 			delete g->next;
 			g->next=q;
 		}
 	}
 }
 
-int Giocatore::cercaNumGioc(Giocatore* head, int x, int &l) {
-	int lung;
-	int c=0;
-	int cont;
-	int i, j, a, b;
+//trova il numero massimo dei giocatori presenti in una stanza di una determinata colonna x
+int Giocatore::cercaNumGioc(Giocatore* head, int x) {
+	int lunghezza, l = 0;
+	int i, j, a, b; //i=x j=y a=x b=x
 
 	Giocatore* g = head;
-	Giocatore* n = head;
-	while (g != NULL)
-	{
-		lung = -1;
+	Giocatore* n = NULL;
+    
+    //scorre la lista dei nodi da confrontare
+	while (g != NULL){
+        n=g;
+		lunghezza = -1;//lunghezza compresa la virgola, per il primo giocatore non serve contare la virgola
+        
 		i = g->coordinata->getCoordinatex();
-		if (i == x)
-		{
-			cont = 0;
+		if (i == x){
 			j = g->coordinata->getCoordinatey();
+            
+            //confronto i nodi per cercare giocatori nella stessa stanza
 			while (n != NULL){
 				a = n->coordinata->getCoordinatex();
 				b = n->coordinata->getCoordinatey();
 				if ((a == i) && (b == j)){
-					lung = lung + (strlen(n->nomgioc) + 1);
-					cont++;
+					lunghezza = lunghezza + (strlen(n->nomgioc) + 1); //numero di caratteri da stampare più la virgola
 				}
 				n = n->next;
 			}
 		}
-		if (l < lung) l = lung;
-		if (c < cont) c = cont;
+		if (l < lunghezza) l = lunghezza;
 		g = g->next;
-		n = head;
 	}
-	return (c);
+	return (l);
 }

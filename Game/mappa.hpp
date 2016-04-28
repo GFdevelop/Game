@@ -7,16 +7,16 @@
 
 class mappa{
 private:
-	int x;
-	int y;
-	int X;
-	int Y;
+	int x; //coordinata stanza più a SX
+	int y; //coordinata stanza più bassa
+	int X; //coordinata stanza più a DX
+	int Y; //coordinata stanza più alta
 public:
 	mappa();
 	~mappa();
 	void add(coordinate * gioc);
 	void print(coordinate * testa, Giocatore * head);
-	void forName(Giocatore * head, int inX, int x, int y, int l);
+	void forName(Giocatore * head, int x, int y, int l);
 };
 
 #endif

@@ -8,11 +8,11 @@ coordinate::coordinate() {
     a = 0;
     b = 0;
     room = NULL;
-    pros = NULL;
+    next = NULL;
 }
 
 coordinate::~coordinate() {
-	cout<<"Rimossa stanza x:"<<a<<" y:"<<b<<endl;
+	//cout<<"Rimossa stanza x:"<<a<<" y:"<<b<<endl;
     delete room;
 }
 
@@ -20,14 +20,13 @@ coordinate::~coordinate() {
 coordinate *coordinate::add(coordinate *& testa, coordinate * precedenti, int direzione) {
     if (testa->room == NULL) {
         testa->room = new Stanza;
-        testa->pros = NULL;
+        testa->next = NULL;
         precedenti = testa;
-    }
-    else {
+    } else {
         coordinate * p = new coordinate;
         p->room = NULL;
         p->room = p->room->Aggiungi_Stanza(precedenti->room, p->room, direzione);
-        p->pros = testa;
+        p->next = testa;
         testa = p;
         precedenti = testa;
     }
@@ -48,16 +47,14 @@ coordinate * coordinate::search(coordinate *& testa, coordinate * precedenti, in
             precedenti = p;
         }
         else {
-            p = p->pros;
+            p = p->next;
         }
     }
     if (found == 0) {
         precedenti = add(testa, precedenti, direzione);
         precedenti->a = x;
         precedenti->b = y;
-        //precedenti->printNode(precedenti);
     }
-    //Qui manca il caso di found=1
     return (precedenti);
 }
 
@@ -76,32 +73,44 @@ void coordinate::move(int &a, int &b, int direzione) {
     }
 }
 
+/*
 void coordinate::rem(coordinate *& c) {
-    if (c->pros != NULL) {
-        rem(c->pros);
+    if (c->next != NULL) {
+        rem(c->next);
     }
     delete c;
 }
+ */
 
-bool coordinate::findMap(coordinate * testa, int i, int j){
+void coordinate::rem(coordinate *& c) {
+    coordinate* h;
+    while (c!=NULL) {
+        h=c;
+        c=c->next;
+        delete h;
+    }
+}
+
+bool coordinate::findMap(coordinate * testa, int x, int y){
 	coordinate * f = testa;
 	int found = 0;
 	while ((f != NULL) && (!found)){
-		if ((i == f->a) && (j == f->b)){
+		if ((x == f->a) && (y == f->b)){
 			found = 1;
 		}
-		f = f->pros;
+		f = f->next;
 	}
 	return (found);
 }
 
+/*
 void coordinate::printList(coordinate * testa) {
     cout << "Lista:" << endl;
     coordinate * s = testa;
     while (s != NULL) {
         cout << s->a << endl;
         cout << s->b << endl;
-        s = s->pros;
+        s = s->next;
     }
 }
 
@@ -110,7 +119,7 @@ void coordinate::printNode(coordinate * precedente) {
     cout << precedente->a << endl;
     cout << precedente->b << endl;
 }
-
+*/
 
 Stanza* coordinate::getRoom(){
     return(room);

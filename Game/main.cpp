@@ -107,17 +107,17 @@ int main(){
     
 	//fine gioco
     if (head==NULL) {
-        cout<<"\nSono morti tutti i giocatori";
+        cout<<"\nSono morti tutti i giocatori\n";
     } else {
         tmp->getNomGioc(nomgioc);
-		cout << "\nHa vinto giocatore " <<nomgioc<< "\nCon ancora " << tmp->getCibo() << " unità di cibo \na coordinate x:" << tmp->getStanza()->getCoordinatex() << " y:" << tmp->getStanza()->getCoordinatey();
+		cout << "\nHa vinto giocatore " <<nomgioc<< "\nCon ancora " << tmp->getCibo() << " unità di cibo \na coordinate x:" << tmp->getStanza()->getCoordinatex() << " y:" << tmp->getStanza()->getCoordinatey()<<endl;
     }
 	
 	//elimino tutti i giocatori,coordinate e le stanze
-    cout<<"\nPulisco memoria\n";
 	rimuovi(head);
 	headCoordinate->rem(headCoordinate);
-	cout<<"Fine pulizia\n";
+    delete m;
+    
 	return 0;
 }
 
