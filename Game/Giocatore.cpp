@@ -12,11 +12,8 @@ Giocatore::Giocatore()
     nomgioc[0]='\0';
 }
 
-Giocatore::~Giocatore()
-{
-	//cout << "Eliminato giocatore "<<nomgioc<<endl;
+Giocatore::~Giocatore(){
 }
-
 
 Giocatore* Giocatore::AddGioc(Giocatore* link, coordinate *d) {
 	if (link == NULL) {

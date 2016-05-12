@@ -12,7 +12,6 @@ coordinate::coordinate() {
 }
 
 coordinate::~coordinate() {
-	//cout<<"Rimossa stanza x:"<<a<<" y:"<<b<<endl;
     delete room;
 }
 
@@ -41,13 +40,13 @@ coordinate * coordinate::search(coordinate *& testa, coordinate * precedenti, in
     y = precedenti->b;
     move(x, y, direzione);
     while ((p != NULL) && (found == 0)) {
-        if ((x == p->a) && (y == p->b)) {
+        if ((x == p->a) && (y == p->b)) {//controlla se le coordinate della nuova stanza sono nella lista
             found = 1;
-            p->room = p->room->Aggiungi_Stanza(precedenti->room, p->room, direzione);
-            precedenti = p;
+            p->room = p->room->Aggiungi_Stanza(precedenti->room, p->room, direzione);//collega la stanza vecchia con quella nuova
+            precedenti = p;//il puntatore passa dalla vecchia stanza alla nuova
         }
         else {
-            p = p->next;
+            p = p->next;//va avanti
         }
     }
     if (found == 0) {
@@ -103,23 +102,7 @@ bool coordinate::findMap(coordinate * testa, int x, int y){
 	return (found);
 }
 
-/*
-void coordinate::printList(coordinate * testa) {
-    cout << "Lista:" << endl;
-    coordinate * s = testa;
-    while (s != NULL) {
-        cout << s->a << endl;
-        cout << s->b << endl;
-        s = s->next;
-    }
-}
 
-void coordinate::printNode(coordinate * precedente) {
-    cout << "\nNodo:" << endl;
-    cout << precedente->a << endl;
-    cout << precedente->b << endl;
-}
-*/
 
 Stanza* coordinate::getRoom(){
     return(room);

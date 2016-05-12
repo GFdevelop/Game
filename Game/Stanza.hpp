@@ -5,8 +5,7 @@
 #include<ctime>
 #include<cstdlib>
 
-class Stanza
-{
+class Stanza{
 private:
 	Stanza* nextUP;
 	Stanza* nextDOWN;

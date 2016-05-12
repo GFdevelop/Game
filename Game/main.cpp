@@ -14,88 +14,89 @@
 using namespace std;
 
 void rimuovi(Giocatore *headGiocatore);
+void aggiungi_cibo(Giocatore* tmp);
 
+typedef Giocatore* g;
 int main(){
 	Giocatore *head;
 	coordinate *d = NULL;
 	coordinate *headCoordinate = new coordinate;
 	Giocatore *tmp;
-	Giocatore *tmp2;
 	mappa * m = new mappa;
 	
 	int turno = 1;
 	int mossa = 0;
-	int ciboStanza;
 	int giro=1;
 	int numgioc=0, i;
 	int tmpGioc;
+    int tmpcibo;
     char nomgioc[20]="";
 	head = NULL;
     
-	//input numero giocatori
+	//prende in input numero giocatori
     do{
 		cout << "Inserisci il numero di giocatori (Min 2-Giocatori) :";
 		cin >> numgioc;
 	} while (numgioc < 2);
 	tmpGioc = numgioc;
-	//inserisco i giocatori in una lista
+    
+	//inserisce i giocatori in una lista
 	for (i = 1; i <= numgioc; i++){
 		head = head->AddGioc(head, d);
 	}
-	//inizializzo la stanza
+	//inizializza la stanza
 	d = headCoordinate->add(headCoordinate, NULL, 0);
-	m->add(d);	//per stampa mappa
-    tmp = head;
+	m->add(d);	//per definire i confini inziali della mappa (0,0)
     
-	//inizializza tutti i giocatori alla stanza iniziale con coordinate 0,0
+    //inizializza tutti i giocatori alla stanza iniziale con coordinate 0,0
+    tmp = head;
 	while (tmp!=NULL) {
         tmp->setStanza(d);
         tmp=tmp->getNext();
     }
+    tmp = head;
     
+    //pulisce la schermata
     system(CLEARSCR);
-	tmp = head;
     
-	//inizia il gioco
-	m->print(headCoordinate, head);
-    
-	while ((head!=NULL) && ((head->getNext())!=NULL)) {
-		cout << "\nTurno " << turno;
-		while (giro != (numgioc + 1)) {
-			tmp2 = tmp->getNext();
+
+    while ((head!=NULL) && ((head->getNext())!=NULL)) {
+		while (giro != (numgioc + 1)) {//ciclo che gestisce a quale giocatore tocca
             
+            cout<<"Turno "<<turno<<endl;
+            m->print(headCoordinate, head);
+            
+            //viene assegnato il nome del giocatore a nomgioc
             tmp->getNomGioc(nomgioc);
+            
 			cout << "\nTocca a giocatore " << nomgioc << "\nCibo a disposizione: " << tmp->getCibo() << "\nCoordinate giocatore: x:" << tmp->getStanza()->getCoordinatex() << " y:" << tmp->getStanza()->getCoordinatey();
             do {
 				cout << "\nDove si sposta? 8-su 6-destra 2-giu 4-sinistra: ";
 				cin >> mossa;
 			} while ((mossa != 8) && (mossa != 6) && (mossa != 2) && (mossa != 4));
             
-			tmp->setCibo((tmp->getCibo()) - 1);//toglie 1 di cibo al giocatore
+            //toglie una unità di cibo al giocatore
+			tmp->setCibo((tmp->getCibo()) - 1);
             
 			d = headCoordinate->search(headCoordinate, tmp->getStanza(), mossa);
             
-			m->add(d);	//per stampa mappa
+            //per aggiornare gli estremi della mappa
+			m->add(d);
             
 			tmp->setStanza(d);
-			ciboStanza = tmp->getStanza()->getRoom()->getCibo();
-			if (ciboStanza != 0) {
-				cout << "Hai trovato " << ciboStanza << " unita' di cibo!\n";
-                tmp->setCibo((tmp->getCibo()) + ciboStanza);
-			}
-			tmp->getStanza()->getRoom()->azzeraCibo();
+            aggiungi_cibo(tmp);
             
-            if ((tmp->getCibo())==0) {//se il giocatore ha 0 di cibo allora viene eliminato
+            tmpcibo=tmp->getCibo();
+            tmp=tmp->getNext();
+            
+            //se il giocatore ha 0 di cibo allora viene eliminato
+            if (tmpcibo==0) {
                 tmp->eliminaGiocatore(head);
-				tmpGioc = tmpGioc - 1;
+                tmpGioc = tmpGioc - 1;
             }
             
-			tmp = tmp2;
 			giro++;
 			system(CLEARSCR);
-            
-			//stampa mappa
-			m->print(headCoordinate, head);
 		}
         
 		//ricomincia il giro
@@ -107,13 +108,13 @@ int main(){
     
 	//fine gioco
     if (head==NULL) {
-        cout<<"\nSono morti tutti i giocatori\n";
+        cout<<"\nSono morti tutti i giocatori\n\n";
     } else {
         tmp->getNomGioc(nomgioc);
-		cout << "\nHa vinto giocatore " <<nomgioc<< "\nCon ancora " << tmp->getCibo() << " unità di cibo \na coordinate x:" << tmp->getStanza()->getCoordinatex() << " y:" << tmp->getStanza()->getCoordinatey()<<endl;
+		cout << "\nHa vinto giocatore " <<nomgioc<< "\nCon ancora " << tmp->getCibo() << " unità di cibo \na coordinate x:" << tmp->getStanza()->getCoordinatex() << " y:" << tmp->getStanza()->getCoordinatey()<<endl<<endl;
     }
 	
-	//elimino tutti i giocatori,coordinate e le stanze
+	//elimino tutti i giocatori, le coordinate e le stanze
 	rimuovi(head);
 	headCoordinate->rem(headCoordinate);
     delete m;
@@ -125,6 +126,16 @@ void rimuovi(Giocatore *headGiocatore){
 	if (headGiocatore != NULL)
 		rimuovi(headGiocatore->getNext());
 	delete headGiocatore;
+}
+
+void aggiungi_cibo(Giocatore* tmp){
+    int ciboStanza=0;
+    ciboStanza = tmp->getStanza()->getRoom()->getCibo();
+    if (ciboStanza != 0) {
+        cout << "Hai trovato " << ciboStanza << " unita' di cibo!\n";
+        tmp->setCibo((tmp->getCibo()) + ciboStanza);
+    }
+    tmp->getStanza()->getRoom()->azzeraCibo();
 }
 
 //Inserisco i giocatori nel gioco
