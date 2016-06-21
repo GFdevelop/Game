@@ -15,8 +15,13 @@ public:
 	mappa();
 	~mappa();
 	void add(coordinate * gioc);
+    // Postcondition: Salva gli estremi se maggiori/minori
+    
 	void print(coordinate * testa, Giocatore * head);
+    // Postcondition: Stampa le parentesi e gli spazi
+    
 	void forName(Giocatore * head, int x, int y, int l);
+    // Postcondition: Stampa i nomi dei giocatori ed eventuali spazi
 };
 
 #endif

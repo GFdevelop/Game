@@ -7,17 +7,18 @@ Stanza::Stanza() {
     nextRIGHT = NULL;
     nextDOWN = NULL;
     nextLEFT = NULL;
-    cibo=0;
+    cibo=0;//viene impostato in Aggiungi_Stanza con setCibo
 }
 
 Stanza::~Stanza() {
 }
 
 Stanza* Stanza::Aggiungi_Stanza(Stanza * Stanza_Vecchia, Stanza * Stanza_Nuova, int direzione) {
+    //Aggiungi_Stanza crea una nuova stanza se le viene passata come nulla e la collega con la staza precedente,altrimenti collega solo le due stanze
     //2=giù 4=sx 6=dx 8=sù
     if (Stanza_Nuova == NULL) {
         Stanza_Nuova = new Stanza;
-        Stanza_Nuova->impCibo();
+        Stanza_Nuova->setCibo();
     }
     if ((direzione == 8)&&(Stanza_Nuova->nextDOWN==NULL)&&(Stanza_Vecchia->nextUP==NULL)) {
             Stanza_Vecchia->nextUP = Stanza_Nuova;
@@ -42,11 +43,15 @@ void Stanza::azzeraCibo() {
     cibo = 0;
 }
 
-void Stanza::impCibo() {
-    // 2% = 10 cibo
-    // 4% = 5 cibo
-    // 8% = 2 cibo
-    // 86% = 0 cibo
+void Stanza::setCibo() {
+    /*
+     viene generato un numero random (seguendo l'esempio del dado) e in base a quel numero
+     si assegna un tot di cibo in base a questa percentuale:
+     2% = 10 cibo (50)
+     4% = 5 cibo (48 e 49)
+     8% = 2 cibo (da 44 a 47)
+     86% = 0 cibo (da 0 a 43)
+    */
     srand(time(0));
     int valoreRandom=0;
     valoreRandom=(rand() % 50) + 1;

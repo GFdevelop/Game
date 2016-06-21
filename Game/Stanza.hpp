@@ -15,12 +15,19 @@ private:
 public:
 	Stanza();
 	~Stanza();
+    
 	Stanza* Aggiungi_Stanza(Stanza* Stanza_Vecchia, Stanza* Stanza_Nuova, int direzione);
-	Stanza* creaTesta();
+    // Precondition: Stanza_Vecchia non deve essere NULL Stanza_Nuova deve essere NULL direzione deve essere 2, 4, 6 o 8
+    // Postcondition: ritorna la Stanza_Nuova
+    
 	void azzeraCibo();
-	void imp_valoreRandom();
-	void impCibo();
+    // Postcondition: mette il cibo a 0
+    
+	void setCibo();
+    // Postcondition: imposta il cibo in base a un valore random autogenerato
+    
 	int getCibo();
+    // Postcondition: ritorna il cibo
 };
 
 #endif

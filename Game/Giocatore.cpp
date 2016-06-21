@@ -51,18 +51,23 @@ coordinate* Giocatore::getStanza() {
 	return(coordinata);
 }
 
-Giocatore* Giocatore::getNext() {
-    return (next);
-}
-
 void Giocatore::setStanza(coordinate *d) {
     coordinata=d;
+}
+
+Giocatore* Giocatore::getNext() {
+    return (next);
 }
 
 void Giocatore::getNomGioc(char a[]) {
     strcpy(a,nomgioc);
 }
 
+void Giocatore::setNext(Giocatore* g){
+    this->next=g;
+}
+
+/*
 void Giocatore::eliminaGiocatore(Giocatore*& head) {
     Giocatore* g=head;
     
@@ -89,11 +94,11 @@ void Giocatore::eliminaGiocatore(Giocatore*& head) {
 		}
 	}
 }
+*/
 
-//trova il numero massimo dei giocatori presenti in una stanza di una determinata colonna x
 int Giocatore::cercaNumGioc(Giocatore* head, int x) {
 	int lunghezza, l = 0;
-	int i, j, a, b; //i=x j=y a=x b=x
+	int i, j, a, b; //i=x j=y a=x b=y
 
 	Giocatore* g = head;
 	Giocatore* n = NULL;
