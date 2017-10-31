@@ -97,7 +97,7 @@ int Giocatore::cercaNumGioc(Giocatore* head, int x, int &l)
 {
 	int lung;
 	int c=0;
-	int cont;
+	int cont=0;
 	int i, j, a, b;
 
 	Giocatore* g = head;
